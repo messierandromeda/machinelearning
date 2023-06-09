@@ -67,6 +67,12 @@ https://deeplearningcourses.com/c/deep-learning-tensorflow-2
 Deep Learning Courses Exclusives
 ================================
 
+Data Science: Bayesian Linear Regression in Python
+https://deeplearningcourses.com/c/bayesian-linear-regression-in-python
+
+Data Science: Bayesian Classification in Python
+https://deeplearningcourses.com/c/bayesian-classification-in-python
+
 Classical Statistical Inference and A/B Testing in Python
 https://deeplearningcourses.com/c/statistical-inference-in-python
 
@@ -80,6 +86,15 @@ https://deeplearningcourses.com/c/matlab
 
 Other Course Links
 ==================
+
+Financial Analysis: Build a ChatGPT Pairs Trading Bot
+https://deeplearningcourses.com/c/chatgpt-pairs-trading
+
+Math 0-1: Calculus for Data Science & Machine Learning
+https://deeplearningcourses.com/c/calculus-data-science
+
+Data Science & Machine Learning: Naive Bayes in Python
+https://deeplearningcourses.com/c/data-science-machine-learning-naive-bayes-in-python
 
 Cutting-Edge AI: Deep Reinforcement Learning in Python
 https://deeplearningcourses.com/c/cutting-edge-artificial-intelligence
