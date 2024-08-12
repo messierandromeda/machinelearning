@@ -5,6 +5,13 @@ import gym
 import matplotlib.pyplot as plt
 from datetime import datetime
 
+gym_minor_version = int(gym.__version__.split('.')[1])
+if gym_minor_version >= 19:
+  exit("Please install OpenAI Gym 0.19.0 or earlier")
+
+if tf.__version__.startswith('2'):
+  exit("Please install Tensorflow 1.x")
+
 
 ### avoid crashing on Mac
 # doesn't seem to work

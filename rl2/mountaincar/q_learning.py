@@ -70,7 +70,7 @@ class Model:
     self.feature_transformer = feature_transformer
     for i in range(env.action_space.n):
       model = SGDRegressor(learning_rate=learning_rate)
-      model.partial_fit(feature_transformer.transform( [env.reset()] ), [0])
+      model.partial_fit(feature_transformer.transform( [env.reset()[0]] ), [0])
       self.models.append(model)
 
   def predict(self, s):
@@ -99,19 +99,23 @@ class Model:
 
 # returns a list of states_and_rewards, and the total reward
 def play_one(model, env, eps, gamma):
-  observation = env.reset()
+  observation = env.reset()[0]
   done = False
   totalreward = 0
   iters = 0
   while not done and iters < 10000:
     action = model.sample_action(observation, eps)
     prev_observation = observation
-    observation, reward, done, info = env.step(action)
+    observation, reward, done, truncated, info = env.step(action)
 
     # update the model
-    next = model.predict(observation)
-    # assert(next.shape == (1, env.action_space.n))
-    G = reward + gamma*np.max(next[0])
+    if done:
+      G = reward
+    else:
+      Qnext = model.predict(observation)
+      # assert(next.shape == (1, env.action_space.n))
+      G = reward + gamma*np.max(Qnext[0])
+
     model.update(prev_observation, action, G)
 
     totalreward += reward
@@ -165,14 +169,14 @@ def main(show_plots=True):
   N = 300
   totalrewards = np.empty(N)
   for n in range(N):
-    # eps = 1.0/(0.1*n+1)
-    eps = 0.1*(0.97**n)
+    eps = 1.0/(0.1*n+1)
+    # eps = 0.1*(0.97**n)
     if n == 199:
       print("eps:", eps)
     # eps = 1.0/np.sqrt(n+1)
     totalreward = play_one(model, env, eps, gamma)
     totalrewards[n] = totalreward
-    if (n + 1) % 100 == 0:
+    if (n + 1) % 10 == 0:
       print("episode:", n, "total reward:", totalreward)
   print("avg reward for last 100 episodes:", totalrewards[-100:].mean())
   print("total steps:", -totalrewards.sum())
